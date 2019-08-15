@@ -18,3 +18,11 @@ Learning React and ES6 by building a Movie discovery App
 - [x] Airing Today (TV)
 - [x] TV Show Detail
 - [x] Movie Detail
+
+## Code Challenges
+
+- [ ] IMDB Link
+- [ ] Tabs inside of Movie / Show Details (YT Videos, Production Company & Countries)
+- [ ] Collections Link
+- [ ] /collections Route
+- [ ] On TV Show, show seasons and creators
