@@ -4,6 +4,9 @@ import propTypes from "prop-types";
 import styled from "styled-components";
 import Loader from "Components/Loader";
 import { Link } from "react-router-dom";
+import Series from "Components/Series";
+import Poster from "Components/Poster";
+import Message from "Components/Message";
 
 const Container = styled.div`
   height: calc(100vh - 50px);
@@ -109,7 +112,7 @@ const TrailerTitle = styled.span`
   font-size: 20px;
 `;
 
-const HomePresenter = ({ result, error, loading }) =>
+const HomePresenter = ({ result, collection, seasons, error, loading }) =>
   loading ? (
     <Loader />
   ) : (
@@ -165,12 +168,44 @@ const HomePresenter = ({ result, error, loading }) =>
             </>
           ) : null}
         </Data>
+        {collection && collection.parts.length > 0 && (
+          <Series title={collection.name}>
+            {collection.parts.map(movie => (
+              <Poster
+                key={movie.id}
+                id={movie.id}
+                imageUrl={movie.backdrop_path}
+                title={movie.title}
+                rating={movie.vote_average}
+                year={movie.release_date && movie.release_date.substring(0, 4)}
+                isMovie={true}
+              />
+            ))}
+          </Series>
+        )}
+        {seasons && seasons.episodes.length > 0 && (
+          <Series title="에피소드">
+            {seasons.episodes.map(movie => (
+              <Poster
+                key={movie.id}
+                id={movie.id}
+                imageUrl={movie.still_path}
+                title={movie.name}
+                year={movie.air_date && movie.air_date.substring(0, 4)}
+                isMovie={false}
+              />
+            ))}
+          </Series>
+        )}
       </Content>
+      {error && <Message color="#e74c3c" text={error} />}
     </Container>
   );
 
 HomePresenter.propTypes = {
   result: propTypes.object,
+  collection: propTypes.object,
+  seasons: propTypes.object,
   error: propTypes.string,
   loading: propTypes.bool.isRequired
 };

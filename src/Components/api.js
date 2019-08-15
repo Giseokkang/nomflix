@@ -40,6 +40,10 @@ export const movieApi = {
         language: "ko-KR",
         query: encodeURIComponent(term)
       }
+    }),
+  movieCollection: id =>
+    api.get(`collection/${id}`, {
+      params: apiKeyAndLanguage.params
     })
 };
 
@@ -69,5 +73,9 @@ export const tvApi = {
         language: "ko-KR",
         query: encodeURIComponent(term)
       }
+    }),
+  showSeasons: id =>
+    api.get(`tv/${id}/season/{season_number}`, {
+      params: apiKeyAndLanguage.params
     })
 };
