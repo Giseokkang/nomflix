@@ -16,12 +16,12 @@ export default () => (
     <>
       <Header />
       <Switch>
-        <Route path="/" exact component={Home} />
-        <Route path="/tv" component={TV} />
-        <Route path="/search" component={Search} />
+        <Route path="nomflix/" exact component={Home} />
+        <Route path="nomflix/tv" component={TV} />
+        <Route path="nomflix/search" component={Search} />
         <Redirect from="#" to="/" />
-        <Route path="/movie/:id" component={Detail} />
-        <Route path="/show/:id" component={Detail} />
+        <Route path="nomflix/movie/:id" component={Detail} />
+        <Route path="nomflix/show/:id" component={Detail} />
       </Switch>
     </>
   </Router>
