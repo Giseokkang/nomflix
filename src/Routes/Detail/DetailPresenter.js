@@ -3,7 +3,6 @@ import Helmet from "react-helmet";
 import propTypes from "prop-types";
 import styled from "styled-components";
 import Loader from "Components/Loader";
-import { Link } from "react-router-dom";
 import Series from "Components/Series";
 import Poster from "Components/Poster";
 import Message from "Components/Message";
@@ -198,7 +197,6 @@ const HomePresenter = ({ result, collection, seasons, error, loading }) =>
           </Series>
         )}
       </Content>
-      {error && <Message color="#e74c3c" text={error} />}
     </Container>
   );
 
