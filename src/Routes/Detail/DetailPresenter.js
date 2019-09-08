@@ -63,6 +63,47 @@ const Divider = styled.span`
   margin: 0 10px;
 `;
 
+const LogoContainer = styled.div`
+  display: flex;
+  margin-top: 20px;
+  align-items: center;
+`;
+
+const CompanyLogo = styled.div`
+  background-image: url(${props => props.logoImg});
+  background-position: center center;
+  background-size: cover;
+  width: 35px;
+  height: 35px;
+  border-radius: 15px;
+  margin-left: 15px;
+
+  &:hover {
+    opacity: 1;
+    transform: scale(0.95);
+  }
+`;
+
+const CountriesContainer = styled.div`
+  display: flex;
+  margin-top: 20px;
+  align-items: center;
+`;
+
+const CountryName = styled.span`
+  margin-left: 10px;
+  padding: 5px 10px;
+  background-color: #3498db;
+  border-radius: 20%;
+  color: white;
+  opacity: 0.9;
+  cursor: default;
+  &:hover {
+    opacity: 1;
+    transform: scale(0.98);
+  }
+`;
+
 const Overview = styled.p`
   font-size: 20px;
   opacity: 0.7;
@@ -74,7 +115,7 @@ const Overview = styled.p`
 const TrailerContainer = styled.div`
   margin-top: 30px;
   width: 100%;
-  height: 400px;
+  height: 300px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -96,7 +137,7 @@ const Trailer = styled.div`
   background-color: #2c3e50;
   color: white;
   border-radius: 10px;
-  opacity: 0.5;
+  opacity: 0.7;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -111,7 +152,7 @@ const TrailerTitle = styled.span`
   font-size: 20px;
 `;
 
-const HomePresenter = ({ result, collection, seasons, error, loading }) =>
+const DetailPresenter = ({ result, collection, seasons, error, loading }) =>
   loading ? (
     <Loader />
   ) : (
@@ -146,6 +187,26 @@ const HomePresenter = ({ result, collection, seasons, error, loading }) =>
                   : `${genre.name} / `
               )}
             </Item>
+            {result.production_companies &&
+              result.production_companies.length > 0 && (
+                <LogoContainer>
+                  {result.production_companies.map(campany => (
+                    <CompanyLogo
+                      logoImg={`https://image.tmdb.org/t/p/original${campany.logo_path}`}
+                    >
+                      {}
+                    </CompanyLogo>
+                  ))}
+                </LogoContainer>
+              )}
+            {result.production_countries &&
+              result.production_countries.length > 0 && (
+                <CountriesContainer>
+                  {result.production_countries.map(country => (
+                    <CountryName>{country.iso_3166_1}</CountryName>
+                  ))}
+                </CountriesContainer>
+              )}
           </ItemContainer>
           <Overview>{result.overview}</Overview>
           {result.videos.results.length > 0 ? (
@@ -200,7 +261,7 @@ const HomePresenter = ({ result, collection, seasons, error, loading }) =>
     </Container>
   );
 
-HomePresenter.propTypes = {
+DetailPresenter.propTypes = {
   result: propTypes.object,
   collection: propTypes.object,
   seasons: propTypes.object,
@@ -208,4 +269,4 @@ HomePresenter.propTypes = {
   loading: propTypes.bool.isRequired
 };
 
-export default HomePresenter;
+export default DetailPresenter;
